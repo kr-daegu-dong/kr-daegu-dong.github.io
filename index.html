@@ -222,324 +222,313 @@
 <body>
 <div class="sfb" data-org="kr-daegu-dong">
 
-  <!-- ===== REGION DATA (progressive-enhancement source; content below is always readable) ===== -->
-  <script id="region-data" type="application/json">{
-    "sido": "대구광역시",
-    "sigungu": "동구",
-    "org_slug": "kr-daegu-dong",
-    "site_url": "https://kr-daegu-dong.github.io/",
-    "title": "동구 지역 정보 · 대구광역시"
-  }</script>
-
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Share+Tech+Mono&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DungGeunMo&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
     .sfb{
-      --navy:#1A237E;
-      --navy-d:#0e155a;
-      --navy-dd:#080d3a;
-      --amber:#FFC107;
-      --amber-d:#c99500;
-      --flap:#161821;
-      --flap2:#0d0e15;
-      --flap-line:#050609;
-      --paper:#f2f0e9;
-      --paper2:#e6e2d6;
-      --ink:#161821;
-      --mono:"Share Tech Mono","DSEG7","Noto Sans KR",ui-monospace,monospace;
-      --body:"Noto Sans KR","Spoqa Han Sans Neo","Noto Sans",system-ui,sans-serif;
+      /* ── 동대구역 전광판 디자인 토큰 ── */
+      --navy:#003366;          /* 표지판 남색 (지정) */
+      --navy-d:#00284f;
+      --navy-dd:#001a33;
+      --amber:#FFCC00;         /* 전광판 노랑 (지정) */
+      --amber-d:#c99f00;
+      --flap:#141414;          /* 플랩 앞면 */
+      --flap2:#0b0b0b;
+      --flap-line:#000;        /* 분할선 (쉐입: 1px solid #000) */
+      --paper:#f2efe6;
+      --paper2:#e7e2d4;
+      --ink:#141414;
+      --line:#000;
+      /* 폰트: 둥근모꼴/DungGeunMo/monospace (지정) */
+      --mono:"DungGeunMo","D2Coding","NanumGothicCoding",ui-monospace,"Menlo",monospace;
+      --body:"DungGeunMo","Noto Sans KR",system-ui,sans-serif;
       font-family:var(--body);
       color:var(--ink);
-      line-height:1.8;
+      line-height:1.85;
+      letter-spacing:.01em;
       -webkit-font-smoothing:antialiased;
     }
     .sfb *{box-sizing:border-box}
 
-    /* ================= HERO — DEPARTURE HALL ================= */
+    /* ================= HERO — 동대구역 대합실 표지판 ================= */
     .sfb-hero{
       position:relative;
       background:
-        radial-gradient(130% 100% at 14% -20%, #2a34a8 0%, var(--navy) 45%, var(--navy-dd) 100%);
+        repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 5px),
+        linear-gradient(180deg,var(--navy) 0%, var(--navy-d) 62%, var(--navy-dd) 100%);
       color:#fff;
-      padding:clamp(26px,5.5vw,58px) clamp(16px,5vw,56px) clamp(30px,6vw,56px);
+      border:1px solid var(--line);          /* 쉐입: 1px solid #000 */
+      border-radius:4px;                       /* 쉐입: 4px */
+      padding:clamp(20px,5vw,44px) clamp(15px,5vw,44px) clamp(22px,5vw,40px);
       overflow:hidden;
       isolation:isolate;
     }
-    /* faint destination-board ruling behind everything */
-    .sfb-hero::before{
-      content:"";position:absolute;inset:0;z-index:-1;
-      background-image:repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 34px);
-      opacity:.7;
+    /* 승강장 안전선 스트라이프 */
+    .sfb-safety{
+      position:absolute;left:0;right:0;top:0;height:10px;z-index:2;
+      background:repeating-linear-gradient(45deg,var(--amber) 0 13px,#111 13px 26px);
+      border-bottom:1px solid var(--line);
     }
     .sfb-mast{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-      font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;font-size:12px;
-      color:var(--amber);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-top:8px;
+      font-family:var(--mono);letter-spacing:.1em;font-size:12px;color:var(--amber);
     }
-    .sfb-mast .live{display:inline-flex;align-items:center;gap:8px;background:rgba(255,193,7,.12);border:1px solid rgba(255,193,7,.4);padding:5px 12px;border-radius:3px}
-    .sfb-mast .live .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);animation:sfb-blink 1.3s steps(2) infinite}
+    .sfb-mast .live{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--amber);color:#001a33;border:1px solid var(--line);border-radius:4px;
+      padding:3px 12px;box-shadow:2px 2px 0 var(--line);letter-spacing:.04em;
+    }
+    .sfb-mast .live .dot{width:8px;height:8px;border-radius:50%;background:#c0392b;border:1px solid var(--line);animation:sfb-blink 1.3s steps(2) infinite}
     @keyframes sfb-blink{50%{opacity:.2}}
-    .sfb-clock{font-family:var(--mono);color:#fff;letter-spacing:.18em}
+    .sfb-clock{
+      font-family:var(--mono);color:var(--amber);letter-spacing:.16em;
+      background:#000;border:1px solid var(--amber-d);border-radius:4px;padding:2px 12px;
+    }
 
-    .sfb-title-wrap{margin:clamp(18px,4vw,30px) 0 6px}
+    .sfb-title-wrap{margin:clamp(16px,4vw,26px) 0 4px}
     .sfb-sido{
-      font-family:var(--mono);letter-spacing:.4em;font-size:clamp(12px,2.6vw,15px);
-      color:var(--amber);text-transform:uppercase;margin:0 0 10px;
+      font-family:var(--mono);letter-spacing:.3em;font-size:clamp(11px,2.6vw,14px);
+      color:var(--amber);margin:0 0 12px;
     }
-    /* the big flip title */
+    /* ── 대형 플립 타이틀: 글자 셀 상하 분할 ── */
     .sfb-h1{
-      margin:0;line-height:1;
-      font-family:var(--mono);
-      font-weight:400;
-      font-size:clamp(30px,8vw,72px);
-      letter-spacing:.02em;
+      margin:0;line-height:1;font-family:var(--mono);font-weight:400;
+      display:flex;flex-wrap:wrap;gap:clamp(3px,.9vw,7px);
+      font-size:clamp(28px,7.4vw,60px);letter-spacing:.02em;
     }
-    /* static (no-JS) form of headline */
-    .sfb-h1 .plain{color:#fff}
-
-    /* flip row: a strip of character tiles */
-    .sfb-flip{display:inline-flex;flex-wrap:wrap;gap:clamp(3px,.7vw,6px);vertical-align:top}
+    /* 정적(무JS) 폴백: 평문 그대로 읽힘 */
+    .sfb-h1 .plain{color:#fff;letter-spacing:.04em}
+    /* JS 플립 셀 스트립 */
+    .sfb-flip{display:inline-flex;flex-wrap:wrap;gap:clamp(3px,.9vw,7px)}
     .sfb-flap-char{
-      position:relative;
-      display:inline-block;
-      width:clamp(26px,6.6vw,58px);
-      height:clamp(40px,10vw,88px);
+      position:relative;display:inline-block;
+      width:clamp(24px,6.2vw,52px);height:clamp(38px,9.4vw,80px);
       background:linear-gradient(var(--flap) 0 50%, var(--flap2) 50% 100%);
-      border-radius:5px;
-      box-shadow:0 3px 8px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
-      color:var(--amber);
-      font-family:var(--mono);
-      font-size:clamp(22px,5.6vw,52px);
-      line-height:clamp(40px,10vw,88px);
-      text-align:center;
-      overflow:hidden;
+      border:1px solid var(--line);border-radius:4px;      /* 쉐입: 4px, 1px solid #000 */
+      color:var(--amber);font-family:var(--mono);
+      font-size:clamp(20px,5.2vw,46px);
+      line-height:clamp(38px,9.4vw,80px);text-align:center;overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
     }
-    /* the split line across the middle of each flap */
+    /* 각 플랩 상/하 분할선 */
     .sfb-flap-char::after{
-      content:"";position:absolute;left:0;right:0;top:50%;height:2px;
-      background:var(--flap-line);transform:translateY(-1px);z-index:5;pointer-events:none;
+      content:"";position:absolute;left:0;right:0;top:50%;height:1px;
+      background:var(--flap-line);transform:translateY(-.5px);z-index:5;pointer-events:none;
     }
     .sfb-flap-char .ch{position:relative;z-index:1;display:block}
-    /* space tile stays dark, no glyph */
-    .sfb-flap-char.space{background:linear-gradient(#101119 0 50%,#0a0b11 50% 100%)}
-    /* subtle flip pulse when a tile updates */
-    .sfb-flap-char.flipping{animation:sfb-flap .09s linear}
+    .sfb-flap-char.space{background:linear-gradient(#0f0f0f 0 50%,#080808 50% 100%)}
+    /* ── 코어 모션: 상하 플립 롤링 ── */
+    .sfb-flap-char.flipping{animation:sfb-flap .1s linear}
     @keyframes sfb-flap{
       0%{transform:perspective(240px) rotateX(0)}
-      49%{transform:perspective(240px) rotateX(-88deg)}
-      50%{transform:perspective(240px) rotateX(88deg)}
+      49%{transform:perspective(240px) rotateX(-90deg)}
+      50%{transform:perspective(240px) rotateX(90deg)}
       100%{transform:perspective(240px) rotateX(0)}
     }
 
-    .sfb-tag{max-width:660px;font-size:clamp(14px,2.4vw,17px);opacity:.95;margin:clamp(16px,3vw,22px) 0 0}
+    .sfb-tag{max-width:640px;font-size:clamp(13.5px,2.4vw,16px);opacity:.96;margin:clamp(15px,3vw,20px) 0 0;line-height:1.8}
 
-    /* ===== BOARD CONSOLE (destination selector = jumps to real sections) ===== */
+    /* ===== 출발 안내 콘솔: 게이트 행 → 실제 섹션으로 이동 ===== */
     .sfb-console{
-      margin:clamp(20px,4vw,30px) 0 0;
+      margin:clamp(18px,4vw,26px) 0 0;
       background:linear-gradient(var(--navy-d),var(--navy-dd));
-      border:2px solid rgba(255,193,7,.35);
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 14px 40px rgba(0,0,0,.4);
+      border:1px solid var(--line);border-radius:4px;overflow:hidden;
     }
     .sfb-console-top{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
-      background:rgba(0,0,0,.35);color:var(--amber);
-      padding:9px 16px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;font-size:12px;
-      border-bottom:1px solid rgba(255,193,7,.25);
+      background:#000;color:var(--amber);
+      padding:8px 14px;font-family:var(--mono);letter-spacing:.1em;font-size:12px;
+      border-bottom:1px solid var(--amber-d);
     }
     .sfb-console-top .platform{color:#fff}
-    /* the departures table */
     .sfb-departures{width:100%;border-collapse:collapse;font-family:var(--mono);color:#fff}
     .sfb-departures caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
     .sfb-departures th{
-      text-align:left;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--amber);padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.12);
+      text-align:left;font-weight:400;font-size:11px;letter-spacing:.14em;
+      color:var(--amber);padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.14);
     }
-    .sfb-dep{
-      cursor:pointer;border-bottom:1px solid rgba(255,255,255,.06);
-      transition:background .15s ease;
-      color:#fff;font-size:14px;
-    }
-    .sfb-dep:hover,.sfb-dep:focus-visible{background:rgba(255,193,7,.14);outline:none}
-    .sfb-dep td{padding:10px 14px;letter-spacing:.05em;vertical-align:middle}
+    .sfb-dep{cursor:pointer;border-bottom:1px solid rgba(255,255,255,.07);transition:background .12s ease;color:#fff;font-size:14px}
+    .sfb-dep:hover,.sfb-dep:focus-visible{background:rgba(255,204,0,.16);outline:none}
+    .sfb-dep td{padding:9px 14px;letter-spacing:.03em;vertical-align:middle}
     .sfb-dep .gate{color:var(--amber);white-space:nowrap}
-    .sfb-dep .dest{font-family:var(--body);letter-spacing:0}
-    .sfb-dep .status{color:var(--amber);font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
-    .sfb-dep .status.on{color:#7CFC9A}
-    .sfb-hint{
-      padding:10px 16px;font-family:var(--body);font-size:12px;color:rgba(255,255,255,.7);
-      background:rgba(0,0,0,.25);
+    .sfb-dep .dest{font-family:var(--body)}
+    .sfb-dep .status{
+      color:#001a33;background:rgba(255,204,0,.2);font-size:11px;letter-spacing:.1em;
+      white-space:nowrap;padding:2px 8px;border-radius:4px;border:1px solid transparent;
     }
+    .sfb-dep .status.on{color:#001a33;background:var(--amber);border-color:var(--line)}
+    .sfb-hint{padding:10px 14px;font-family:var(--body);font-size:12px;color:rgba(255,255,255,.72);background:#000}
 
-    /* ================= BODY — STATION CONCOURSE ================= */
+    /* ================= 본문 — 역 안내소 ================= */
     .sfb-body{
       background:linear-gradient(180deg,var(--paper) 0%,var(--paper2) 100%);
-      padding:clamp(26px,5vw,54px) clamp(14px,5vw,60px) 60px;
+      border:1px solid var(--line);border-radius:4px;margin-top:12px;
+      padding:clamp(22px,5vw,44px) clamp(13px,4vw,40px) clamp(30px,5vw,48px);
     }
     .sfb-nowboard{
-      max-width:1060px;margin:0 auto clamp(20px,4vw,32px);
-      display:flex;align-items:center;gap:14px;
-      font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;
-      color:var(--navy);font-size:12px;
+      display:flex;align-items:center;gap:12px;margin:0 0 clamp(18px,4vw,28px);
+      font-family:var(--mono);letter-spacing:.14em;color:var(--navy);font-size:12px;
     }
-    .sfb-nowboard::before,.sfb-nowboard::after{content:"";flex:1;height:3px;background:repeating-linear-gradient(90deg,var(--navy) 0 12px,transparent 12px 22px)}
+    .sfb-nowboard::before,.sfb-nowboard::after{content:"";flex:1;height:3px;background:repeating-linear-gradient(90deg,var(--navy) 0 11px,transparent 11px 20px)}
 
-    .sfb-content{max-width:1060px;margin:0 auto;display:grid;gap:20px}
+    .sfb-content{display:grid;gap:16px}
 
-    /* Each real section styled as a flip-board panel */
+    /* 각 실제 섹션 = 전광판 패널 (4px, 1px solid #000) */
     .sfb-content section{
-      background:#fff;
-      border:1px solid #d8d2c2;
-      border-top:5px solid var(--navy);
-      border-radius:12px;
-      padding:clamp(18px,3.4vw,32px);
-      box-shadow:0 6px 20px rgba(26,35,126,.07);
-      scroll-margin-top:20px;
+      background:#fff;border:1px solid var(--line);border-radius:4px;
+      padding:clamp(16px,3.4vw,28px);scroll-margin-top:16px;
+      box-shadow:3px 3px 0 rgba(0,0,0,.14);
     }
-    .sfb-content section:nth-of-type(even){border-top-color:var(--amber-d)}
-
-    /* section H2 rendered on a mini flip strip look */
+    /* 섹션 H2 = 미니 플립 스트립 */
     .sfb-content h2{
-      margin:0 0 16px;
-      display:inline-flex;align-items:center;gap:12px;
-      font-family:var(--mono);
-      font-size:clamp(18px,3.4vw,26px);
-      letter-spacing:.04em;
-      color:#fff;
+      margin:0 0 15px;display:inline-flex;align-items:center;gap:10px;
+      font-family:var(--mono);font-weight:400;
+      font-size:clamp(17px,3.4vw,24px);letter-spacing:.03em;color:var(--amber);
       background:linear-gradient(var(--flap) 0 50%, var(--flap2) 50% 100%);
-      padding:8px 16px;border-radius:6px;position:relative;
-      line-height:1.15;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 3px 8px rgba(0,0,0,.25);
+      border:1px solid var(--line);border-radius:4px;
+      padding:7px 15px;position:relative;line-height:1.2;
     }
-    .sfb-content h2::before{
-      content:"▸";color:var(--amber);font-size:.9em;
-    }
-    .sfb-content h2::after{
-      content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.55);
-    }
-    .sfb-content section:nth-of-type(even) h2::before{content:"▸";color:var(--amber)}
+    .sfb-content h2::before{content:"▸";color:var(--amber);font-size:.85em}
+    .sfb-content h2::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.06)}
 
-    .sfb-content p{margin:0 0 12px}
+    .sfb-content p{margin:0 0 12px;font-size:15px}
     .sfb-content p:last-child{margin-bottom:0}
     .sfb-content a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
     .sfb-content a:hover{color:var(--amber-d)}
 
-    /* facts = arrivals rows on the dark board */
+    /* facts = 도착 안내 행 (다크 플립) */
     .sfb-content .facts{list-style:none;padding:0;margin:0;display:grid;gap:8px}
     .sfb-content .facts li{
-      display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-      background:var(--flap);color:#fff;
-      font-family:var(--mono);letter-spacing:.04em;
-      padding:9px 15px;border-radius:6px;font-size:15px;
-      border-left:4px solid var(--amber);
+      display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+      background:var(--flap);color:var(--amber);
+      font-family:var(--mono);letter-spacing:.03em;
+      padding:9px 14px;border:1px solid var(--line);border-radius:4px;font-size:14.5px;
+      position:relative;
     }
+    .sfb-content .facts li::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--flap-line)}
 
-    /* landmarks / heritage / nature = destination cards */
+    /* landmarks / heritage / nature = 목적지 카드 */
     .sfb-content #landmarks ul,
     .sfb-content #heritage ul,
     .sfb-content #nature ul{
       list-style:none;padding:0;margin:6px 0 0;
-      display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:11px;
     }
     .sfb-content #landmarks li,
     .sfb-content #heritage li,
     .sfb-content #nature li{
-      background:var(--paper);border:1px solid #d8d2c2;border-left:4px solid var(--navy);
-      border-radius:8px;padding:12px 14px;position:relative;
+      background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--navy);
+      border-radius:4px;padding:12px 14px;position:relative;font-size:14.5px;
     }
     .sfb-content #landmarks li::before,
     .sfb-content #heritage li::before,
-    .sfb-content #nature li::before{
-      content:"◆";color:var(--amber-d);margin-right:6px;
-    }
+    .sfb-content #nature li::before{content:"◆";color:var(--amber-d);margin-right:6px}
     .sfb-content #landmarks strong,
     .sfb-content #heritage strong,
     .sfb-content #nature strong{color:var(--navy)}
 
-    .sfb-content .symbols{list-style:none;padding:0;margin:6px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-    .sfb-content .symbols li{background:var(--flap);color:#fff;font-family:var(--mono);padding:12px 14px;border-radius:8px;border-bottom:3px solid var(--amber);letter-spacing:.03em}
-
-    /* faq = ticket stubs */
-    .sfb-content .faq details{
-      border:1px solid #d8d2c2;border-radius:8px;margin:0 0 10px;overflow:hidden;background:var(--paper);
+    .sfb-content .symbols{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+    .sfb-content .symbols li{
+      background:var(--flap);color:var(--amber);font-family:var(--mono);
+      padding:10px 14px;border:1px solid var(--line);border-radius:4px;
+      border-bottom:3px solid var(--amber);letter-spacing:.02em;position:relative;
     }
+    .sfb-content .symbols li::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--flap-line)}
+
+    /* faq = 승차권 스텁 */
+    .sfb-content .faq details{border:1px solid var(--line);border-radius:4px;margin:0 0 9px;overflow:hidden;background:var(--paper)}
     .sfb-content .faq summary{
-      cursor:pointer;padding:14px 44px 14px 16px;font-weight:700;color:var(--navy);
+      cursor:pointer;padding:13px 42px 13px 15px;font-weight:700;color:var(--navy);
       list-style:none;position:relative;font-family:var(--body);
     }
     .sfb-content .faq summary::-webkit-details-marker{display:none}
     .sfb-content .faq summary::after{
-      content:"＋";position:absolute;right:16px;top:50%;transform:translateY(-50%);
-      color:var(--amber-d);font-family:var(--mono);font-size:20px;
+      content:"＋";position:absolute;right:14px;top:50%;transform:translateY(-50%);
+      color:var(--amber-d);font-family:var(--mono);font-size:19px;
     }
     .sfb-content .faq details[open] summary::after{content:"－"}
     .sfb-content .faq details[open] summary{background:#fff}
-    .sfb-content .faq details > *:not(summary){padding:0 16px 14px;margin-top:0}
+    .sfb-content .faq details > *:not(summary){padding:0 15px 13px;margin-top:0;font-size:14px}
 
-    #links ul,#github ul{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+    #links ul,#github ul{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:9px}
     #links li a,#github li a{
       display:inline-block;background:var(--navy);color:#fff;text-decoration:none;
-      padding:8px 14px;border-radius:6px;font-family:var(--mono);letter-spacing:.04em;font-size:13px;
+      padding:8px 13px;border:1px solid var(--line);border-radius:4px;
+      font-family:var(--mono);letter-spacing:.03em;font-size:13px;
     }
-    #links li a:hover,#github li a:hover{background:var(--amber-d);color:var(--flap)}
+    #links li a:hover,#github li a:hover{background:var(--amber);color:#001a33}
     #sources{font-size:13px;color:#6b6455}
     #sources ul{padding-left:1.1rem}
     #sources a{color:var(--navy)}
 
+    /* 하단 안내 티커 */
+    .sfb-ticker{
+      margin-top:12px;border:1px solid var(--line);border-radius:4px;overflow:hidden;
+      background:linear-gradient(var(--navy-d),var(--navy-dd));
+    }
+    .sfb-ticker-in{
+      display:inline-block;white-space:nowrap;padding:8px 0;
+      font-family:var(--mono);color:var(--amber);font-size:13.5px;letter-spacing:.06em;
+      animation:sfb-marquee 28s linear infinite;
+    }
+    @keyframes sfb-marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .sfb-ticker:hover .sfb-ticker-in{animation-play-state:paused}
+
     .sfb-foot{
-      text-align:center;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;
-      color:#8a8269;font-size:11px;margin:34px auto 0;max-width:1060px;
+      text-align:center;font-family:var(--mono);letter-spacing:.12em;
+      color:#7f8a97;font-size:11px;margin:16px 0 2px;
     }
 
     @media (prefers-reduced-motion:reduce){
       .sfb-flap-char.flipping{animation:none}
       .sfb-mast .live .dot{animation:none}
+      .sfb-ticker-in{animation:none}
     }
     @media (max-width:600px){
+      .sfb-clock{margin-left:auto}
       .sfb-departures th:nth-child(3),.sfb-dep td:nth-child(3){display:none}
-      .sfb-content h2{font-size:17px;padding:7px 12px}
+      .sfb-content h2{font-size:16px;padding:6px 12px}
     }
   </style>
 
   <!-- ================= HERO ================= -->
   <header class="sfb-hero">
+    <span class="sfb-safety" aria-hidden="true"></span>
     <div class="sfb-mast">
-      <span class="live"><span class="dot"></span>DONGDAEGU STATION · DEPARTURES</span>
+      <span class="live"><span class="dot" aria-hidden="true"></span>동대구역 · DEPARTURES</span>
       <span class="sfb-clock" id="sfb-clock" aria-hidden="true">--:--:--</span>
     </div>
 
     <div class="sfb-title-wrap">
       <p class="sfb-sido">대구광역시</p>
-      <h1 class="sfb-h1">
-        <!-- Plain, always-readable headline (SEO + no-JS). JS swaps in the flip board. -->
-        <span class="plain" id="sfb-plain">동구</span>
+      <h1 class="sfb-h1" aria-label="동구 지역 정보 · 대구광역시">
+        <!-- 평문(무JS/SEO) — JS가 플립보드로 교체 -->
+        <span class="plain" id="sfb-plain">동구 안내판</span>
         <span class="sfb-flip" id="sfb-flip" aria-hidden="true"></span>
       </h1>
     </div>
 
     <p class="sfb-tag">동구는 대구광역시 8개 자치구·군 가운데 면적이 183㎢로 가장 넓은 자치구로, 대구의 북동쪽 관문이자 팔공산과 동대구역을 함께 품은 도시-산악 복합권역이다. 도심에는 경부고속철도가 정차하는 동대구역과 동대구복합환승센터가 자리해 영남권 광역교통의 허브 역할을 하고, 그 북쪽으로는 대구의 진산 팔공산이 병풍처럼 솟아 갓바위·동화사 같은 불교 성지를 거느린다. 대구국제공항이 동촌에 있어 하늘길까지 열려 있어, 철도·항공·고속버스가 한 구역 안에 모인 전국에서도 보기 드문 교통 결절지다. 신암·효목의 오래된 주거지와 안심·혁신동의 신도시, 봉무동 이시아폴리스 산업단지가 공존하며, 대구경북첨단의료복합단지와 대구혁신도시가 들어서 동남권 성장의 새 축을 이룬다. 후삼국 시대 공산 동수 전투의 무대이자 왕건과 신숭겸의 전설이 지명 곳곳에 새겨진 역사의 고장이기도 하다.</p>
 
-    <!-- ===== DEPARTURES CONSOLE — each "gate" scrolls to a real content section ===== -->
-    <div class="sfb-console" role="navigation" aria-label="동구 정보 출발 안내판 — 게이트를 누르면 해당 섹션으로 이동합니다">
+    <!-- ===== 출발 안내판: 게이트 행을 누르면 해당 섹션으로 이동 ===== -->
+    <nav class="sfb-console" aria-label="동구 정보 출발 안내판">
       <div class="sfb-console-top">
         <span>출발 안내 · DEPARTURES</span>
-        <span class="platform" id="sfb-platform">PLATFORM 東 · 팔공산 방면</span>
+        <span class="platform">PLATFORM 東 · 팔공산 방면</span>
       </div>
       <table class="sfb-departures">
         <caption>동구 지역 정보 섹션 안내판</caption>
         <thead>
           <tr><th scope="col">게이트</th><th scope="col">목적지</th><th scope="col">경유</th><th scope="col">상태</th></tr>
         </thead>
-        <tbody id="sfb-dep-body">
-          <!-- Rows injected by JS from the real sections; static hint below covers no-JS -->
-        </tbody>
+        <tbody id="sfb-dep-body"></tbody>
       </table>
       <p class="sfb-hint" id="sfb-hint">아래 안내소에서 동구의 소개·역사·명소·교통 등 모든 정보를 바로 읽을 수 있습니다. (자바스크립트가 없어도 전체 내용이 표시됩니다.)</p>
-    </div>
+    </nav>
   </header>
 
-  <!-- ================= CONTENT (ALWAYS RENDERED — SEO CORE) ================= -->
+  <!-- ================= 본문 (항상 렌더 — SEO 코어) ================= -->
   <main class="sfb-body">
     <div class="sfb-nowboard">NOW BOARDING · 동구 지역 안내소</div>
     <div class="sfb-content" id="sfb-content">
@@ -660,7 +649,12 @@
         </ul>
       </section>
     </div>
-    <p class="sfb-foot">kr-daegu-dong · 동대구역에서 출발하는 동구 로컬 인포메이션 · 팔공산 · 갓바위</p>
+
+    <div class="sfb-ticker" aria-hidden="true">
+      <span class="sfb-ticker-in" id="sfb-ticker">● 동대구역 · 팔공산 · 갓바위 · 동화사 · 대구국제공항 · 불로동 고분군 · 금호강 아양기찻길 · 대구혁신도시 ●&nbsp;&nbsp;● 동대구역 · 팔공산 · 갓바위 · 동화사 · 대구국제공항 · 불로동 고분군 · 금호강 아양기찻길 · 대구혁신도시 ●&nbsp;&nbsp;</span>
+    </div>
+
+    <p class="sfb-foot" id="sfb-foot">kr-daegu-dong · 동대구역에서 출발하는 동구 로컬 인포메이션 · 팔공산 · 갓바위</p>
   </main>
 
   <script>
@@ -669,98 +663,81 @@
     if(!root) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-    /* ---------- read region data (progressive enhancement only) ---------- */
+    /* ---------- region-data 읽기 (생성기가 <head>에 이미 주입. 읽기만.) ---------- */
     var data = {};
     try{
       var raw = document.getElementById('region-data');
       if(raw) data = JSON.parse(raw.textContent || '{}');
     }catch(e){ data = {}; }
-    var sigungu = (data.sigungu && data.sigungu.trim()) || '';
+    var sigungu = (data.sigungu && String(data.sigungu).trim()) || '';
+    var flipTarget = sigungu ? (sigungu + ' 안내판') : '';
 
-    /* ================= 1) SPLIT-FLAP HEADLINE ================= */
+    /* ================= 1) 스플릿-플랩 헤드라인 (상하 롤링) ================= */
     var flipHost = document.getElementById('sfb-flip');
     var plain = document.getElementById('sfb-plain');
-    // Alphabet the flaps cycle through before landing (Hangul-ish placeholders + amber glyphs)
-    var GLYPHS = '＃０１２３４５６７８９ＡＢＣ대구동공산갓바위팔◆▸';
+    var GLYPHS = '0123456789대구동공산팔갓바위화사역◆▸●★';
 
     function makeChar(target){
       var wrap = document.createElement('span');
       wrap.className = 'sfb-flap-char' + (target === ' ' ? ' space' : '');
       var ch = document.createElement('span');
       ch.className = 'ch';
-      ch.textContent = target === ' ' ? '' : '＃';
+      ch.textContent = (target === ' ') ? '' : GLYPHS.charAt(0);
       wrap.appendChild(ch);
       return {wrap:wrap, ch:ch, target:target};
     }
-
     function buildFlip(text){
       flipHost.innerHTML = '';
-      var chars = Array.from(text);
-      var tiles = chars.map(function(t){ var m = makeChar(t); flipHost.appendChild(m.wrap); return m; });
-      return tiles;
+      return Array.from(text).map(function(t){ var m = makeChar(t); flipHost.appendChild(m.wrap); return m; });
     }
-
     function settleTile(tile, delay){
-      if(tile.target === ' '){ return; }
+      if(tile.target === ' ') return;
       if(reduce){ tile.ch.textContent = tile.target; return; }
-      var steps = 5 + Math.floor(Math.random()*7);
-      var i = 0;
+      var steps = 5 + Math.floor(Math.random()*7), i = 0;
       setTimeout(function tick(){
         tile.wrap.classList.add('flipping');
         if(i >= steps){
           tile.ch.textContent = tile.target;
-          setTimeout(function(){ tile.wrap.classList.remove('flipping'); }, 90);
+          setTimeout(function(){ tile.wrap.classList.remove('flipping'); }, 100);
           return;
         }
         tile.ch.textContent = GLYPHS.charAt(Math.floor(Math.random()*GLYPHS.length));
         i++;
-        setTimeout(function(){ tile.wrap.classList.remove('flipping'); tick(); }, 70);
+        setTimeout(function(){ tile.wrap.classList.remove('flipping'); tick(); }, 72);
       }, delay);
     }
-
-    function runFlip(text){
-      var tiles = buildFlip(text);
-      // hide the plain text once the flip board is live (still in DOM for a moment; SEO already indexed)
-      if(plain) plain.style.display = 'none';
-      flipHost.setAttribute('aria-hidden','true');
-      tiles.forEach(function(t,idx){ settleTile(t, idx*110); });
+    if(flipHost && flipTarget){
+      var tiles = buildFlip(flipTarget);
+      if(plain) plain.style.display = 'none';   /* SEO는 이미 색인·평문은 DOM 잔존 불필요 */
+      tiles.forEach(function(t,idx){ settleTile(t, idx*105); });
     }
 
-    if(flipHost && sigungu){
-      runFlip(sigungu);
-    }
-
-    /* ================= 2) LIVE CLOCK ================= */
+    /* ================= 2) 대합실 시계 ================= */
     var clock = document.getElementById('sfb-clock');
     function pad(n){ return (n<10?'0':'')+n; }
-    function tickClock(){
-      if(!clock) return;
-      var d = new Date();
-      clock.textContent = pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
-    }
+    function tickClock(){ if(!clock) return; var d = new Date(); clock.textContent = pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); }
     if(clock){ tickClock(); setInterval(tickClock, 1000); }
 
-    /* ================= 3) DEPARTURES CONSOLE -> real sections ================= */
-    var body = document.getElementById('sfb-dep-body');
+    /* ================= 3) 출발 안내 콘솔 → 실제 섹션 ================= */
+    var depBody = document.getElementById('sfb-dep-body');
     var hint = document.getElementById('sfb-hint');
-    // Map real section ids to board rows. "경유" (via) uses landmark-flavoured local names.
     var vias = ['동대구역','팔공산','갓바위','신천','아양교','불로동','방촌','안심'];
     var meta = [
-      {id:'intro',          dest:'지역 소개',        gate:'G-01'},
-      {id:'facts',          dest:'주요 통계',        gate:'G-02'},
-      {id:'history',        dest:'역사',            gate:'G-03'},
-      {id:'geography',      dest:'지리·자연환경',     gate:'G-04'},
-      {id:'characteristics',dest:'지역 특징',        gate:'G-05'},
-      {id:'landmarks',      dest:'대표 명소',        gate:'G-06'},
-      {id:'heritage',       dest:'문화유산·시설',     gate:'G-07'},
-      {id:'nature',         dest:'자연·휴식',        gate:'G-08'},
-      {id:'transport',      dest:'교통',            gate:'G-09'},
-      {id:'symbols',        dest:'지역 상징',        gate:'G-10'},
-      {id:'faq',            dest:'자주 묻는 질문',    gate:'G-11'}
+      {id:'intro',           dest:'지역 소개',      gate:'G-01'},
+      {id:'facts',           dest:'주요 통계',      gate:'G-02'},
+      {id:'history',         dest:'역사',           gate:'G-03'},
+      {id:'geography',       dest:'지리·자연환경',   gate:'G-04'},
+      {id:'characteristics', dest:'지역 특징',      gate:'G-05'},
+      {id:'landmarks',       dest:'대표 명소',      gate:'G-06'},
+      {id:'heritage',        dest:'문화유산·시설',   gate:'G-07'},
+      {id:'nature',          dest:'자연·휴식',      gate:'G-08'},
+      {id:'transport',       dest:'교통',           gate:'G-09'},
+      {id:'symbols',         dest:'지역 상징',      gate:'G-10'},
+      {id:'faq',             dest:'자주 묻는 질문',  gate:'G-11'}
     ];
     var rows = meta.filter(function(m){ return document.getElementById(m.id); });
 
-    if(body && rows.length){
+    if(depBody && rows.length){
       rows.forEach(function(m, i){
         var tr = document.createElement('tr');
         tr.className = 'sfb-dep';
@@ -774,186 +751,79 @@
           '<td class="dest">'+m.dest+'</td>'+
           '<td class="via">'+via+'</td>'+
           '<td><span class="status'+(on?' on':'')+'">'+(on?'ON TIME':'대기')+'</span></td>';
-
         function go(){
           var el = document.getElementById(m.id);
           if(!el) return;
-          // update statuses: the chosen one boards, others reset
-          body.querySelectorAll('.status').forEach(function(s){ s.classList.remove('on'); s.textContent='대기'; });
+          depBody.querySelectorAll('.status').forEach(function(s){ s.classList.remove('on'); s.textContent='대기'; });
           var st = tr.querySelector('.status'); if(st){ st.classList.add('on'); st.textContent='BOARDING'; }
           el.scrollIntoView({behavior: reduce ? 'auto':'smooth', block:'start'});
           el.style.transition = 'box-shadow .5s ease';
-          el.style.boxShadow = '0 0 0 3px var(--amber), 0 8px 24px rgba(26,35,126,.18)';
-          setTimeout(function(){ el.style.boxShadow=''; }, 1700);
+          el.style.boxShadow = '0 0 0 3px var(--amber), 3px 3px 0 rgba(0,0,0,.14)';
+          setTimeout(function(){ el.style.boxShadow='3px 3px 0 rgba(0,0,0,.14)'; }, 1700);
           if(hint) hint.textContent = m.dest + ' 구간으로 안내합니다 ▸ 아래 패널에서 자세한 내용을 확인하세요.';
         }
         tr.addEventListener('click', go);
-        tr.addEventListener('keydown', function(ev){
-          if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); go(); }
-        });
-        body.appendChild(tr);
+        tr.addEventListener('keydown', function(ev){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); go(); } });
+        depBody.appendChild(tr);
       });
-      // Console is now interactive; the static hint is replaced by live guidance,
-      // but the underlying       <section id="intro">
-        <h2>지역 소개</h2>
-        <p>동구는 대구광역시 8개 자치구·군 가운데 면적이 183㎢로 가장 넓은 자치구로, 대구의 북동쪽 관문이자 팔공산과 동대구역을 함께 품은 도시-산악 복합권역이다. 도심에는 경부고속철도가 정차하는 동대구역과 동대구복합환승센터가 자리해 영남권 광역교통의 허브 역할을 하고, 그 북쪽으로는 대구의 진산 팔공산이 병풍처럼 솟아 갓바위·동화사 같은 불교 성지를 거느린다. 대구국제공항이 동촌에 있어 하늘길까지 열려 있어, 철도·항공·고속버스가 한 구역 안에 모인 전국에서도 보기 드문 교통 결절지다. 신암·효목의 오래된 주거지와 안심·혁신동의 신도시, 봉무동 이시아폴리스 산업단지가 공존하며, 대구경북첨단의료복합단지와 대구혁신도시가 들어서 동남권 성장의 새 축을 이룬다. 후삼국 시대 공산 동수 전투의 무대이자 왕건과 신숭겸의 전설이 지명 곳곳에 새겨진 역사의 고장이기도 하다.</p>
-      </section>
-      <section id="facts">
-        <h2>주요 통계</h2>
-        <ul class="facts">
-          <li>인구: 약 341,436명 (2025)</li>
-          <li>면적: 183 km²</li>
-          <li>신설: 1963년 1월 1일</li>
-        </ul>
-      </section>
-      <section id="history">
-        <h2>역사</h2>
-        <p>동구 일대는 삼국시대에 이미 세력 집단이 존재했음을 불로동·입석동 구릉에 조성된 200여 기의 불로동 고분군이 증언한다. 후삼국 시대인 927년에는 신라를 구원하러 온 고려 태조 왕건이 팔공산(당시 공산) 동수 일대에서 후백제 견훤에게 대패한 공산 동수 전투가 벌어졌고, 이때 신숭겸·김락 등 여덟 장수가 왕건을 대신해 순절했다. 이 참혹한 싸움에서 &#x27;군사가 흩어진 고개&#x27; 파군재, &#x27;한밤중에 달을 보았다&#x27;는 반야월, &#x27;비로소 안심했다&#x27;는 안심 등 동구 특유의 지명이 유래했으며, 여덟 충신을 기려 산 이름을 팔공산이라 불렀다는 설이 전한다. 근대 행정구역으로는 1963년 동부출장소와 동촌출장소를 통합해 대구시 동구로 승격했고, 1981년 대구직할시 편입과 함께 공산면·안심읍을 받아들여 지금의 광역 영역을 갖추었다. 1988년 자치구로 승격하고 1995년 대구광역시 동구로 개칭했으며, 2020년 안심 일대에 혁신동을 신설해 대구혁신도시 시대에 대응했다. 이렇듯 동구는 고대 고분 세력에서 후삼국 격전지, 근대 교통 요충지를 거쳐 첨단의료·혁신도시로 이어지는 긴 역사층을 품고 있다.</p>
-      </section>
-      <section id="geography">
-        <h2>지리·자연환경</h2>
-        <p>동구는 대구 도심의 북동쪽 가장자리에서 경상북도 경산·영천·군위와 경계를 이루며 대구에서 가장 넓은 행정 면적을 차지한다. 구역 면적의 80% 이상이 팔공산괴에서 갈라져 나온 산지로, 해발 1,192m 비로봉을 정점으로 동봉·서봉이 이어지는 팔공산이 구의 북쪽을 웅장하게 두르고 있다. 산자락에서 발원한 물줄기는 남쪽 저지대로 흘러 대구의 젖줄인 금호강에 합류하며, 금호강과 신천 주변으로 신암·효목·동촌의 시가지가 형성되었다. 봉무동 단산지, 불로동 일대의 완만한 구릉과 하천 충적지에는 취락과 농경지가 발달해 왔고, 도동 협곡에는 천연기념물 제1호로 지정된 측백나무 숲이 낭떠러지를 뒤덮고 있다. 산지·하천·평지가 뚜렷이 대비되는 이 지형 덕분에 동구는 도심 생활권과 팔공산 자연생활권이 한 구역 안에서 극명하게 나뉘는 독특한 공간 구조를 지닌다. 사계절 팔공산의 단풍과 설경, 금호강 수변이 어우러져 도시 속 자연 휴식지로도 사랑받는다.</p>
-      </section>
-      <section id="characteristics">
-        <h2>지역 특징</h2>
-        <p>동구의 인구는 2025년 12월 기준 약 34만 명으로, 22개 행정동에 걸쳐 신암·효목의 원도심 주거지와 안심·혁신동의 신시가지가 공존한다. 산업 측면에서는 봉무동 이시아폴리스에 섬유·패션 융합 산업단지가 조성되고, 대구혁신도시에 한국가스공사·신용보증기금 등 공공기관이 이전해 지식·공공서비스 기반이 강화되었다. 특히 안심 일원의 대구경북첨단의료복합단지(첨복단지)는 신약·의료기기 연구개발 거점으로 동구를 첨단 바이오헬스 산업의 중심으로 끌어올리고 있다. 한편 팔공산 자락에는 동화사·갓바위를 찾는 참배객과 관광객을 상대로 한 사찰음식·전통찻집 등 종교관광 경제권이 형성되어 있다. 동대구역과 대구국제공항, 복합환승센터를 낀 신천동·신세계백화점 일대는 대구 동부의 상업·유동인구 중심지로 기능한다. 이처럼 동구는 원도심 정주, 혁신도시 공공·의료, 팔공산 관광, 교통 결절 상업이 겹겹이 얹힌 다층적 성격의 자치구다.</p>
-      </section>
-      <section id="landmarks">
-        <h2>대표 명소</h2>
-        <ul>
-          <li><strong>팔공산 갓바위(관봉 석조여래좌상)</strong> — 팔공산 관봉 정상에 자리한 통일신라기 석불좌상으로 보물로 지정되어 있으며, 머리에 갓처럼 생긴 판석을 얹은 모습에서 &#x27;갓바위&#x27;로 불린다. 정성껏 기도하면 한 가지 소원은 반드시 들어준다는 영험 전설이 널리 퍼져, 수능철과 정초에는 전국에서 수십만 명의 참배객이 산길을 오른다.</li>
-          <li><strong>동화사</strong> — 팔공산 남쪽 자락에 자리한 1,500여 년 역사의 대한불교조계종 총림 사찰로, 통일약사여래대불 등 수많은 불교 문화재를 보유한 한국 불교의 대표 성지다. 동화사지구에서 정상 전망대까지 오르는 팔공산 케이블카와 어우러져 사계절 참배객과 관광객이 끊이지 않는다.</li>
-          <li><strong>동대구역·동대구복합환승센터</strong> — 경부선·경부고속선이 지나는 대구의 관문 역으로, 신세계백화점과 결합한 동대구복합환승센터에는 고속·시외버스 터미널이 함께 들어서 철도·버스·도시철도가 한자리에서 환승된다. 대구 동부 유동인구의 중심이자 영남권 광역교통의 핵심 결절지다.</li>
-          <li><strong>불로동 고분군</strong> — 불로동과 입석동 구릉에 5세기 전후 삼국시대에 조성된 대규모 봉토분 유적으로, 211기 안팎의 고분이 복원되어 능선을 따라 장관을 이룬다. 대구 지역 고대 세력의 존재를 보여주는 사적으로, 봄가을 완만한 언덕을 산책하기 좋은 역사 공원이다.</li>
-        </ul>
-      </section>
-      <section id="heritage">
-        <h2>문화유산·문화시설</h2>
-        <ul>
-          <li><strong>대구 도동 측백나무 숲</strong> — 향산 북쪽 절벽을 뒤덮은 측백나무 자생림으로, 우리나라 천연기념물 제1호로 지정된 상징적 유산이다. 높이 100여 m, 길이 60여 m의 낭떠러지에 빽빽이 자라난 측백향이 협곡을 감싸며 도심 가까이 원시림의 정취를 전한다.</li>
-          <li><strong>신숭겸 장군 유적지(표충단)</strong> — 927년 공산 동수 전투에서 왕건으로 변장해 순절한 고려 개국공신 신숭겸을 기리는 유적으로, 지묘동에 순절단과 표충단·표충사가 조성되어 있다. 후삼국 통일 과정의 충절을 증언하는 동구만의 역사 유산으로, 인근 파군재삼거리에는 장군의 동상이 세워져 있다.</li>
-          <li><strong>파계사·부인사 등 팔공산 사찰군</strong> — 팔공산 자락에는 동화사 외에도 조선 왕실의 원당이던 파계사, 고려 초조대장경을 보관했다고 전하는 부인사 등 유서 깊은 고찰과 50여 개 암자가 골짜기마다 산재한다. 불교 문화재의 보고로서 팔공산 일대를 &#x27;우리나라 제일의 불교 성지&#x27;로 불리게 한 문화 유산군이다.</li>
-          <li><strong>팔공산 단풍축제</strong> — 매년 가을 팔공산 동화사·갓바위 일원에서 열리는 대표 지역 축제로, 절정의 단풍과 함께 공연·먹거리·산행 행사가 어우러진다. 동구를 대표하는 관광 콘텐츠로 자리 잡아 대구 시민과 외지 관광객을 팔공산으로 불러 모은다.</li>
-        </ul>
-      </section>
-      <section id="nature">
-        <h2>자연·휴식</h2>
-        <ul>
-          <li><strong>팔공산자연공원</strong> — 비로봉·동봉·서봉을 아우르는 대구의 진산으로, 갓바위지구·동화사지구·수태골 등 여러 등산 기점에서 다양한 난이도의 산행 코스가 열려 있다. 케이블카로 정상 전망대에 올라 대구 시가지와 능선을 조망할 수 있어 사계절 등산객과 관광객이 즐겨 찾는다.</li>
-          <li><strong>봉무공원과 단산지</strong> — 봉무동에 조성된 도시근린공원으로 나비생태원·나비생태학습관, 야외공연장, 야영장 등을 갖추고 있다. 공원 안 저수지 단산지 둘레에는 약 3.9km의 산책로가 못을 한 바퀴 감돌아, 가족 단위 나들이와 걷기 명소로 사랑받는다.</li>
-          <li><strong>금호강 수변과 아양기찻길</strong> — 동촌·효목을 지나는 금호강 변에는 자전거길과 산책로가 이어지고, 옛 철교를 보행 명소로 되살린 아양기찻길이 강을 가로지른다. 동촌유원지와 함께 강바람을 맞으며 걷기 좋은 도심 속 수변 휴식 공간이다.</li>
-          <li><strong>도동 향산 산책로·구절송 전망대</strong> — 천연기념물 측백나무 숲을 품은 향산 일대에는 완만한 숲길이 나 있어 측백향을 맡으며 걷기 좋다. 인접한 구절송 전망대에 오르면 봉무공원·불로고분군·왕건 유적지가 어우러진 팔공산 자락 풍경을 한눈에 담을 수 있다.</li>
-        </ul>
-      </section>
-      <section id="transport">
-        <h2>교통</h2>
-        <p>동구는 철도·항공·고속버스가 한 구역에 모인 대구 최대의 교통 결절지다. 도심의 동대구역에는 경부선과 경부고속선이 정차해 서울·부산과 KTX·SRT로 직결되며, 바로 옆 동대구복합환승센터가 고속버스와 시외버스 터미널을 통합해 전국 노선을 잇는다. 하늘길로는 동촌의 대구국제공항이 제주·인천 등 국내선과 일부 국제선을 운항해 영남권 항공 관문 역할을 한다. 도시철도는 1호선이 동구를 관통해 동대구역·아양교·율하를 지나 종점 안심(혁신도시·첨복단지)역까지 이어져 혁신도시와 도심을 연결한다. 도로 교통은 경부고속도로 동대구 나들목과 대구외곽순환고속도로 팔공산·파군재 나들목이 사통팔달의 접근성을 제공한다. 이처럼 KTX·항공·지하철·고속도로가 한데 얽혀, 동구는 대구를 넘어 영남 동부권 교통의 심장부로 기능한다.</p>
-      </section>
-      <section id="symbols">
-        <h2>지역 상징</h2>
-        <ul class="symbols">
-          <li>구화(꽃): 철쭉</li>
-          <li>구목(나무): 고로쇠나무</li>
-          <li>구조(새): 까치</li>
-        </ul>
-      </section>
-      <section id="faq">
-        <h2>자주 묻는 질문</h2>
-        <div class="faq">
-          <details>
-            <summary>대구 동구는 어떤 지역인가요?</summary>
-            <p>동구는 면적 약 183㎢로 대구에서 가장 넓은 자치구이며, 팔공산과 갓바위·동화사 같은 불교 성지, 동대구역·대구국제공항 같은 광역 교통시설, 대구혁신도시와 첨단의료복합단지가 한데 모인 도시-산악 복합권역입니다. 후삼국 공산 전투의 무대로 역사성도 깊습니다.</p>
-          </details>
-          <details>
-            <summary>팔공산 갓바위는 왜 유명한가요?</summary>
-            <p>갓바위는 팔공산 관봉 정상에 있는 통일신라기 석조여래좌상(보물)으로, 머리에 갓 모양 판석을 얹은 독특한 모습을 하고 있습니다. 정성껏 기도하면 한 가지 소원은 꼭 이뤄준다는 전설로 유명해, 수능철과 정초에 전국에서 참배객이 몰립니다.</p>
-          </details>
-          <details>
-            <summary>동대구역에서 이용할 수 있는 교통수단은 무엇인가요?</summary>
-            <p>동대구역에서는 경부선·경부고속선 KTX·SRT를 이용할 수 있고, 바로 옆 동대구복합환승센터에서 고속·시외버스로 환승할 수 있습니다. 도시철도 1호선 동대구역과도 연결되어 철도·버스·지하철을 한자리에서 갈아탈 수 있습니다.</p>
-          </details>
-          <details>
-            <summary>동구의 지명에 얽힌 역사 이야기가 있나요?</summary>
-            <p>927년 왕건과 견훤이 맞붙은 공산 동수 전투에서 유래한 지명이 많습니다. 군사가 흩어진 고개 &#x27;파군재&#x27;, 한밤중 달을 본 &#x27;반야월&#x27;, 왕건이 비로소 마음을 놓은 &#x27;안심&#x27;이 대표적이며, 여덟 충신을 기려 팔공산이라 부르게 되었다는 이야기도 전합니다.</p>
-          </details>
-          <details>
-            <summary>동구에서 가볼 만한 자연·휴식 명소는 어디인가요?</summary>
-            <p>팔공산자연공원과 케이블카, 나비생태원과 단산지 산책로가 있는 봉무공원, 금호강 변 아양기찻길과 동촌유원지, 천연기념물 제1호 도동 측백나무 숲과 구절송 전망대 등이 대표적인 자연 휴식 명소입니다.</p>
-          </details>
-          <details>
-            <summary>대구혁신도시와 첨단의료복합단지는 동구 어디에 있나요?</summary>
-            <p>대구혁신도시와 대구경북첨단의료복합단지(첨복단지)는 동구 안심 일원 신서 지역에 조성되어 있으며, 도시철도 1호선 종점인 안심(혁신도시·첨복단지)역으로 연결됩니다. 공공기관과 의료 연구개발 시설이 모여 동구의 새로운 성장 거점이 되고 있습니다.</p>
-          </details>
-        </div>
-      </section>
-      <section id="links">
-        <h2>공식 링크</h2>
-        <ul>
-          <li><a href="https://www.dong.daegu.kr" rel="noopener">대구광역시 동구청</a></li>
-          <li><a href="https://www.dong.daegu.kr/tour/index.do" rel="noopener">동구청 관광 안내</a></li>
-        </ul>
-      </section>
-      <section id="github">
-        <h2>GitHub</h2>
-        <ul>
-          <li><a href="https://github.com/kr-daegu-dong" rel="noopener">GitHub 조직: kr-daegu-dong</a></li>
-          <li><a href="https://github.com/kr-daegu-dong/kr-daegu-dong.github.io" rel="noopener">이 사이트 저장소</a></li>
-        </ul>
-      </section>
-      <section id="sources">
-        <h2>출처</h2>
-        <ul class="sources">
-          <li><a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EA%B5%AC_(%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C)" rel="noopener">동구 (대구광역시) - 위키백과</a> (조회 2026-07-08)</li>
-          <li><a href="https://www.dong.daegu.kr/tour/travel/view.do?mid=0301000000&amp;idx=110" rel="noopener">대구광역시 동구청 홈페이지 - 관광/국가지정유산</a> (조회 2026-07-08)</li>
-          <li><a href="https://ko.wikipedia.org/wiki/%EA%B3%B5%EC%82%B0_%EB%8F%99%EC%88%98_%EC%A0%84%ED%88%AC" rel="noopener">공산 동수 전투 - 위키백과</a> (조회 2026-07-08)</li>
-          <li><a href="https://ko.wikipedia.org/wiki/%ED%8C%94%EA%B3%B5%EC%82%B0" rel="noopener">팔공산 - 위키백과</a> (조회 2026-07-08)</li>
-          <li><a href="https://ko.wikipedia.org/wiki/%EB%8C%80%EA%B5%AC_%EB%8F%84%EB%8F%99_%EC%B8%A1%EB%B0%B1%EB%82%98%EB%AC%B4_%EC%88%B2" rel="noopener">대구 도동 측백나무 숲 - 위키백과</a> (조회 2026-07-08)</li>
-        </ul>
-      </section> remains fully rendered and readable regardless.
       if(hint) hint.textContent = '게이트 행을 눌러 원하는 정보 구간으로 이동하세요. 모든 내용은 아래 안내소에 그대로 표시됩니다.';
     }
 
-    /* ================= 4) FLIP each section heading on scroll ================= */
-    var HEAD_GLYPHS = '＃０１２３동대구팔공산갓바위◆▸';
+    /* ================= 4) 섹션 제목 스크롤 시 플립 롤링 ================= */
+    var HEAD_GLYPHS = '0123동대구팔공산갓바위역◆▸';
     function flipHeading(h2){
       if(reduce) return;
       var full = h2.textContent;
       var chars = Array.from(full);
-      // rebuild h2 as per-char spans, then settle
       h2.textContent = '';
       var frag = document.createDocumentFragment();
       var spans = chars.map(function(t){
         var s = document.createElement('span');
-        s.textContent = (t === ' ') ? ' ' : '＃';
+        s.style.display = 'inline-block';
+        s.style.transformOrigin = '50% 100%';
+        s.textContent = (t === ' ') ? ' ' : HEAD_GLYPHS.charAt(0);
         frag.appendChild(s);
         return {el:s, target:t};
       });
       h2.appendChild(frag);
       spans.forEach(function(sp, idx){
         if(sp.target === ' '){ sp.el.textContent = ' '; return; }
-        var steps = 3 + Math.floor(Math.random()*5);
-        var k = 0;
+        var steps = 3 + Math.floor(Math.random()*5), k = 0;
         setTimeout(function tick(){
-          if(k >= steps){ sp.el.textContent = sp.target; return; }
-          sp.el.textContent = HEAD_GLYPHS.charAt(Math.floor(Math.random()*HEAD_GLYPHS.length));
-          k++;
-          setTimeout(tick, 60);
+          sp.el.style.transition = 'transform .05s ease-in';
+          sp.el.style.transform = 'perspective(120px) rotateX(-88deg)';
+          setTimeout(function(){
+            sp.el.textContent = (k >= steps) ? sp.target : HEAD_GLYPHS.charAt(Math.floor(Math.random()*HEAD_GLYPHS.length));
+            sp.el.style.transform = 'perspective(120px) rotateX(0deg)';
+            k++;
+            if(k <= steps) setTimeout(tick, 60);
+          }, 55);
         }, idx*45);
       });
     }
-
     var heads = Array.prototype.slice.call(document.querySelectorAll('.sfb-content h2'));
     if('IntersectionObserver' in window && !reduce && heads.length){
       var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){
-          if(en.isIntersecting){
-            flipHeading(en.target);
-            io.unobserve(en.target);
-          }
-        });
-      }, {threshold:0.4});
+        entries.forEach(function(en){ if(en.isIntersecting){ flipHeading(en.target); io.unobserve(en.target); } });
+      }, {threshold:0.35});
       heads.forEach(function(h){ io.observe(h); });
     }
+
+    /* ================= 5) region-data로 티커·푸터 향상 ================= */
+    try{
+      var bits = [];
+      if(Array.isArray(data.landmarks)) data.landmarks.forEach(function(x){ if(x&&x.name) bits.push(x.name); });
+      if(Array.isArray(data.nature_rest)) data.nature_rest.forEach(function(x){ if(x&&x.name) bits.push(x.name); });
+      if(bits.length){
+        var seg = '● ' + bits.join(' · ') + ' ●  ';
+        var t = document.getElementById('sfb-ticker'); if(t) t.textContent = seg + seg;
+      }
+      var foot = document.getElementById('sfb-foot');
+      if(foot && data.coords && typeof data.coords.lat === 'number'){
+        foot.textContent = (data.org_slug || 'kr-daegu-dong') + ' · ' + (data.sigungu||'') +
+          ' 안내 전광판 · 북위 ' + data.coords.lat.toFixed(3) + '° 동경 ' + (data.coords.lng||0).toFixed(3) + '°';
+      }
+    }catch(e){}
   })();
   </script>
 </div>
